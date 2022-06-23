@@ -1,96 +1,90 @@
 package Binary_tree;
-
 import java.util.Scanner;
 
-public class QN1 {
-	//create a binary tree
-	
-	public static void main(String[] args) {
-		createTree();
-		System.out.println("The preorder is: ");
-		preorder(root);
-	}
-	
+public class QN1{
+    
+    static Node root;
     static class Node {
-        int value;
+        String value;
         Node left;
         Node right;
     
-        Node(int value) {
+        Node(String value) {
             this.value = value;
             right = null;
             left = null;
         }
     }
 
-    
-    static Scanner sc = new Scanner(System.in);
-//    static Node mainroot;
-    static Node root ;
-//    static int counter = 0;
-        static Node createTree() {
-            System.out.println("Enter the data");
-            System.out.println("**Enter -1 if you want to go back or end");
-            int data = sc.nextInt();
-            
-            if(data==-1) {
-                return root;
-            }
-            
-            root = new Node(data);
-//            if(counter==0) {
-//             mainroot = root;
-//            }
-//            counter++;
-            System.out.println("Where do you want its child left or right or up?(0 or 1 or -1)");
-            int pointer = sc.nextInt();
 
-            String flag = "";
-            if(pointer==0) {
-                flag = "left";
-                root.left = createTree();
-            }
-            else if(pointer==1) {
-                flag = "right";
-                root.right = createTree();
-            }
-            else if(pointer==-1) {
-            	return root;
-            }
+public static void main(String[] args) {
 
-            if(root.left==null || root.right==null){
-                if(flag.equals("left")){
-                    System.out.println("Where do you want its child right or up?(0 or 1)");
-                    int pointer1 = sc.nextInt();
-                    if(pointer1==0){
-                        root.right = createTree();
-                    }
-                    else{
-                        return root;
-                    }
-                }
-                else{
-                    System.out.println("Where do you want its child left or up?(0 or 1)");
-                    int pointer2 = sc.nextInt();
-                    if(pointer2==0){
-                        root.left = createTree();
-                    }
-                    else{
-                        return root;
-                    }
-                }
-            }
-            return root;
+    creation_bianry();
+    System.out.print("Inorder Traversal : ");
+    inorder(root);
+    System.out.println(" ");
+    System.out.println(root.value);
+    System.out.print("Preorder Traversal : ");
+    preorder(root);
+    System.out.println(" ");
+    System.out.print("Postorder Traversal : ");
+    postorder(root);
+    System.out.println(" ");
+
+}
+ static Node creation_bianry(){
+    Scanner sc = new Scanner(System.in);
+    System.out.println("Enter value :  ");
+    String d = sc.next();
+    Node temp = new Node(d);
+    if(d.equals("-1")){
+        return null;
     }
-	
-		public static void preorder(Node root) {
-		    if(root !=  null) {
-		   //Visit the node by Printing the node data  
-		      System.out.printf("%d ",root.value);
-		      preorder(root.left);
-		      preorder(root.right);
-		    }
-		  }
-	
+    System.out.print("In left ");
+    temp.left=creation_bianry();
+    System.out.print("In right ");
+    temp.right=creation_bianry();
+    root = temp;
+    return root;
+ }
+
+
+ static void preorder(Node root){
+    if(root==null)
+    {
+        return;
+    }
+    else{    
+        System.out.print(root.value +" "); 
+        preorder(root.left);
+        preorder(root.right);
+    }
+}
+
+static void postorder(Node root)
+{
+    if(root==null)
+    {
+        return;
+    }
+    else{
+        postorder(root.left);
+        postorder(root.right);
+        System.out.print(root.value +" ");
+    }
+}
+
+static  void inorder(Node root){
+    if(root==null)
+    {
+        return;
+    }
+    else
+    {
+        inorder(root.left);
+        System.out.print(root.value +" ");
+        inorder(root.right);
+       
+    }}
 
 }
