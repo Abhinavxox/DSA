@@ -5,9 +5,8 @@ public class ContainerWithMostWater {
         int maxArea = 0;
         int n = height.length;
         for (int i = 0; i < n; i++) {
-            for (int j = 0; j < n; j++) {
+            for (int j = i; j < n; j++) {
                 // to reduce complexity
-                if (j > i) {
                     // finding the area
                     int firstHeight = height[i];
                     int secondHeight = height[j];
@@ -21,7 +20,6 @@ public class ContainerWithMostWater {
                     if (area > maxArea) {
                         maxArea = area;
                     }
-                }
             }
         }
         return maxArea;
