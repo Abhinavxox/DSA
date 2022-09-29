@@ -39,3 +39,14 @@ root.insert(23)
 root.insert(12)
 root.print_tree()
 
+
+#check whether binary tree is full or not
+def isFullTree(root):
+    if root == None:
+        return True
+    if root.left == None and root.right == None:
+        return True
+    if root.left != None and root.right != None:
+        return (isFullTree(root.left) and isFullTree(root.right))
+    return False
+
