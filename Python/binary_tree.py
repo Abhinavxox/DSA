@@ -37,7 +37,8 @@ root.insert(13)
 root.insert(45)
 root.insert(23)
 root.insert(12)
-root.print_tree()
+root.insert(15)
+# root.print_tree()
 
 
 #check whether binary tree is full or not
@@ -50,6 +51,8 @@ def isFullTree(root):
         return (isFullTree(root.left) and isFullTree(root.right))
     return False
 
+# print(isFullTree(root))
+
 #check whether binary tree is perfect or not
 def isPerfectTree(root):
     if root == None:
@@ -60,13 +63,17 @@ def isPerfectTree(root):
         return (isPerfectTree(root.left) and isPerfectTree(root.right))
     return False
 
+# print(isPerfectTree(root))
+
 #find the preorder traversal of binary tree
 def preorder(root):
     if root:
         print(root.data)
         preorder(root.left)
         preorder(root.right)
-    
+
+# print("Preorder traversal of binary tree is:")
+# preorder(root)
 
 #find the inorder traversal of binary tree
 def inorder(root):
@@ -75,6 +82,9 @@ def inorder(root):
         print(root.data)
         inorder(root.right)
 
+# print("Inorder traversal of binary tree is:")
+# inorder(root)
+
 #find the postorder traversal of binary tree
 def postorder(root):
     if root:
@@ -82,5 +92,5 @@ def postorder(root):
         postorder(root.right)
         print(root.data)
 
-    
-    
+# print("Postorder traversal of binary tree is:")
+# postorder(root)
