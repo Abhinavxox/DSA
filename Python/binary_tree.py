@@ -50,3 +50,37 @@ def isFullTree(root):
         return (isFullTree(root.left) and isFullTree(root.right))
     return False
 
+#check whether binary tree is perfect or not
+def isPerfectTree(root):
+    if root == None:
+        return True
+    if root.left == None and root.right == None:
+        return True
+    if root.left != None and root.right != None:
+        return (isPerfectTree(root.left) and isPerfectTree(root.right))
+    return False
+
+#find the preorder traversal of binary tree
+def preorder(root):
+    if root:
+        print(root.data)
+        preorder(root.left)
+        preorder(root.right)
+    
+
+#find the inorder traversal of binary tree
+def inorder(root):
+    if root:
+        inorder(root.left)
+        print(root.data)
+        inorder(root.right)
+
+#find the postorder traversal of binary tree
+def postorder(root):
+    if root:
+        postorder(root.left)
+        postorder(root.right)
+        print(root.data)
+
+    
+    
