@@ -1,4 +1,6 @@
 class Node:
+    
+    #initialization 
     def __init__(self, data):
         self.left = None
         self.right = None
@@ -21,15 +23,43 @@ class Node:
         else:
             self.data = data
 
-#find the inorder traversal of binary tree
-def inorder(root):
-    if root:
-        inorder(root.left)
-        print(root.data)
-        inorder(root.right)
 
-# print("Inorder traversal of binary tree is:")
-# inorder(root)
+#creating and inserting nodes
+root = Node(69)
+root.insert(70)
+root.insert(13)
+root.insert(45)
+root.insert(23)
+root.insert(12)
+root.insert(15)
+root.insert(16)
+root.insert(17)
+root.insert(18)
+
+
+#check whether binary tree is full or not
+def isFullTree(root):
+    if root == None:
+        return True
+    if root.left == None and root.right == None:
+        return True
+    if root.left != None and root.right != None:
+        return (isFullTree(root.left) and isFullTree(root.right))
+    return False
+
+# print(isFullTree(root))
+
+#check whether binary tree is perfect or not
+def isPerfectTree(root):
+    if root == None:
+        return True
+    if root.left == None and root.right == None:
+        return True
+    if root.left != None and root.right != None:
+        return (isPerfectTree(root.left) and isPerfectTree(root.right))
+    return False
+
+# print(isPerfectTree(root))
 
 #find the preorder traversal of binary tree
 def preorder(root):
@@ -41,6 +71,16 @@ def preorder(root):
 # print("Preorder traversal of binary tree is:")
 # preorder(root)
 
+#find the inorder traversal of binary tree
+def inorder(root):
+    if root:
+        inorder(root.left)
+        print(root.data)
+        inorder(root.right)
+
+print("Inorder traversal of binary tree is:")
+inorder(root)
+
 #find the postorder traversal of binary tree
 def postorder(root):
     if root:
@@ -50,42 +90,3 @@ def postorder(root):
 
 # print("Postorder traversal of binary tree is:")
 # postorder(root)
-
-#determine if a binary tree is height balnced or not
-def isHeightBalanced(root):
-    if root == None:
-        return True
-    lh = height(root.left)
-    rh = height(root.right)
-    if abs(lh-rh) <= 1 and isHeightBalanced(root.left) and isHeightBalanced(root.right):
-        return True
-    return False
-
-#find the height of a binary tree
-def height(root):
-    if root == None:
-        return 0
-    return 1 + max(height(root.left), height(root.right))
-
-# print(isHeightBalanced(root))
-
-#insert into a binary search tree 10 values
-root = Node(10)
-root.insert(5)
-root.insert(15)
-root.insert(3)
-root.insert(7)
-root.insert(12)
-root.insert(18)
-root.insert(1)
-root.insert(4)
-root.insert(6)
-
-# print("Inorder traversal of binary tree is:")
-# inorder(root)
-
-
-
-
-
-
