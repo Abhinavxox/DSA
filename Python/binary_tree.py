@@ -170,15 +170,17 @@ else:
     print("Kth largest element is ", res.data)
 
 
-def mergeTrees(root1, root2):
+def merge(root1, root2):
     if root1 is None:
         return root2
     if root2 is None:
         return root1
     root1.data += root2.data
-    root1.left = mergeTrees(root1.left, root2.left)
-    root1.right = mergeTrees(root1.right, root2.right)
+    root1.left = merge(root1.left, root2.left)
+    root1.right = merge(root1.right, root2.right)
     return root1
+
+
 
 first_tree = []
 f = int(input("Enter the size of first tree : "))
@@ -203,7 +205,7 @@ for i in range(0,s):
     second_tree.append(val)
 
 for i in range(0,s):
-    tree1 = insert(tree1, second_tree[i])
+    tree2 = insert(tree2, second_tree[i])
 
 print("The second tree is: ")
 inorder(tree2)
