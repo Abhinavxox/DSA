@@ -1,8 +1,3 @@
-#Build a AVL tree, write separate function for each rotation. You need to get the elements to be inserted from the user.
-# After construction of the tree, return the height of the tree.
-# Write a function to delete the nodes from the tree. Elements to be deleted as per user’s wish. 
-# Return the heightof tree after each deletion.
-
 class Node:
     def __init__(self,data):
         self.data = data
@@ -48,13 +43,50 @@ def right_left_rotation(node):
     node.right = right_rotation(node.right)
     return left_rotation(node)
 
-#question 1
+#insert node
+def insert(root, data):
+    if root is None:
+        return Node(data)
+    if data < root.data:
+        root.left = insert(root.left, data)
+    else:
+        root.right = insert(root.right, data)
+    balance = getBalance(root)
+    if balance > 1 and data < root.left.data:
+        return right_rotation(root)
+    if balance < -1 and data > root.right.data:
+        return left_rotation(root)
+    if balance > 1 and data > root.left.data:
+        return left_right_rotation(root)
+    if balance < -1 and data < root.right.data:
+        return right_left_rotation(root)
+    return root
 
 print("Enter the elements to be inserted in the AVL tree: ")
 elements = input().split()
 root = Node(elements[0])
 for i in range(1, len(elements)):
     root.insert(elements[i])
+
+def getBalance(root):
+    if root is None:
+        return 0
+    return height(root.left) - height(root.right)
+
+def height(root):
+    if root is None:
+        return 0
+    else:
+        lheight = height(root.left)
+        rheight = height(root.right)
+
+        if lheight > rheight:
+            return lheight+1
+        else:
+            return rheight+1
+        
+print("The height of the tree created is : ",height(root)-1)
+
 
 def inorder(root):
     if root:
@@ -83,19 +115,6 @@ def postorder(root):
 print("Postorder traversal of binary tree is:")
 postorder(root)
 
-def height(root):
-    if root is None:
-        return 0
-    else:
-        lheight = height(root.left)
-        rheight = height(root.right)
-
-        if lheight > rheight:
-            return lheight+1
-        else:
-            return rheight+1
-        
-print("The height of the tree created is : ",height(root)-1)
 
 
 def deleteNode(root, data):
