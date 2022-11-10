@@ -132,17 +132,17 @@ r = insert(r, 100)
 print("Original Tree")
 inorder(r)
 
-# r = deleteNode(r, 84)
-# print("Tree after deleting 84")
-# inorder(r)
+r = deleteNode(r, 84)
+print("Tree after deleting 84")
+inorder(r)
 
-# r = deleteNode(r, 29)
-# print("Tree after deleting 29")
-# inorder(r)
+r = deleteNode(r, 29)
+print("Tree after deleting 29")
+inorder(r)
 
-# r = deleteNode(r, 41)
-# print("Tree after deleting 41")
-# inorder(r)
+r = deleteNode(r, 41)
+print("Tree after deleting 41")
+inorder(r)
 
 def smallest(root):
     if root is None or root.left is None:

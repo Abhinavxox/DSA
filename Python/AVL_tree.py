@@ -51,7 +51,7 @@ def insert(root, data):
         root.left = insert(root.left, data)
     else:
         root.right = insert(root.right, data)
-    balance = getBalance(root)
+    balance = balancedFactor(root)
     if balance > 1 and data < root.left.data:
         return right_rotation(root)
     if balance < -1 and data > root.right.data:
@@ -68,7 +68,7 @@ root = Node(elements[0])
 for i in range(1, len(elements)):
     root.insert(elements[i])
 
-def getBalance(root):
+def balancedFactor(root):
     if root is None:
         return 0
     return height(root.left) - height(root.right)
@@ -117,38 +117,49 @@ postorder(root)
 
 
 
-def deleteNode(root, data):
+def delete(root, data):
     if root is None:
         return root
-    if data < root.data:
-        root.left = deleteNode(root.left, data)
-        return root
+    elif data < root.data:
+        root.left = delete(root.left, data)
     elif data > root.data:
-        root.right = deleteNode(root.right, data)
-        return root
-    if root.left is None and root.right is None:
-        return None
-    if root.left is None:
-        temp = root.right
-        root = None
-        return temp
-    elif root.right is None:
-        temp = root.left
-        root = None
-        return temp
-    
-    succParent = root
-    succ = root.right
-    while succ.left is not None:
-        succParent = succ
-        succ = succ.left
-    if succParent != root:
-        succParent.left = succ.right
+        root.right = delete(root.right, data)
     else:
-        succParent.right = succ.right
-    root.data = succ.data
+        if root.left is None:
+            temp = root.right
+            root = None
+            return temp
+        elif root.right is None:
+            temp = root.left
+            root = None
+            return temp
+        temp = minValueNode(root.right)
+        root.data = temp.data
+        root.right = delete(root.right, temp.data)
+    if root is None:
+        return root
+    root.height = 1 + max(height(root.left), height(root.right))
+    balance = balancedFactor(root)
+    if balance > 1 and balancedFactor(root.left) >= 0:
+        return right_rotation(root)
+    if balance < -1 and balancedFactor(root.right) <= 0:
+        return left_rotation(root)
+    if balance > 1 and balancedFactor(root.left) < 0:
+        root.left = left_rotation(root.left)
+        return right_rotation(root)
+    if balance < -1 and balancedFactor(root.right) > 0:
+        root.right = right_rotation(root.right)
+        return left_rotation(root)
     return root
 
-deletionValue = int(input("Enter the node you want to delete"))
-deleteNode(root, deletionValue)
+def minValueNode(node):
+    current = node
+    while(current.left is not None):
+        current = current.left
+    return current
+
+deletionValue = input("Enter the node you want to delete :")
+delete(root, deletionValue)
+print("Inorder traversal of binary tree after deletion of "+deletionValue+" is : ")
+inorder(root)
 print("The height of the tree after deletion is : ",height(root)-1)
