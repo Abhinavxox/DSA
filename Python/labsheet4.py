@@ -56,3 +56,59 @@
 # print(height(arr))
 
 # question 4
+class Node:
+    def __init__(self, data):
+        self.left = None
+        self.right = None
+        self.data = data
+
+    def insert(self, data):
+        #if tree is not empty
+        if self.data:
+            if data < self.data:
+                if self.left == None:
+                    self.left = Node(data)
+                else:
+                    self.left.insert(data)
+            elif data > self.data:
+                if self.right == None:
+                    self.right = Node(data)
+                else:
+                    self.right.insert(data)
+        #if tree is empty
+        else:
+            self.data = data
+
+root = Node(4)
+root.insert(2)
+root.insert(6)
+root.insert(1)
+root.insert(3)
+root.insert(5)
+root.insert(7)
+
+def convertToMaxHeap(root):
+    if root == None:
+        return
+    convertToMaxHeap(root.left)
+    convertToMaxHeap(root.right)
+    if root.left != None and root.right != None:
+        if root.left.data > root.right.data:
+            root.data = root.left.data
+        else:
+            root.data = root.right.data
+    elif root.left != None:
+        root.data = root.left.data
+    elif root.right != None:
+        root.data = root.right.data
+    return root
+
+def inorder(root):
+    if root:
+        inorder(root.left)
+        print(root.data)
+        inorder(root.right)
+
+print("Inorder traversal of sorted BST is:")
+inorder(root)
+
