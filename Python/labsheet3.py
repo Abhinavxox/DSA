@@ -76,5 +76,42 @@ class Node:
         self.right = None
         self.data = data
     
-    # def insert(self,data):
-    #     if data:
+    def insert(self,data):
+        if self.data == None:
+            self.data = data
+        else:
+            if data<self.data:
+                if self.left == None:
+                    self.left = Node(data)
+                else:
+                    self.left.insert(data)
+            elif data>self.data:
+                if self.right == None:
+                    self.right = Node(data)
+                else:
+                    self.right.insert(data)
+
+#inserting 10 values in 
+
+root = Node(60)
+root.insert(12)
+root.insert(90)
+root.insert(4)                
+root.insert(41)
+root.insert(71)
+root.insert(100)
+root.insert(1)
+root.insert(29)
+root.insert(23)
+root.insert(37)
+root.insert(84)
+
+def inorder(root):
+    if root:
+        inorder(root.left)
+        print(root.data)
+        inorder(root.right)
+
+inorder(root)
+
+#function to delete a node
