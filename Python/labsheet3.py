@@ -161,3 +161,15 @@ inorder(root)
 root.delete(84)
 print("\nthe bst after deleting 84 is : ")
 inorder(root)
+
+#finding the smallest element in tree
+def smallestElement(root):
+    if root is None or root.left is None:
+        return root
+    
+    return smallestElement(root.left)
+
+print("the smallest in the tree is ", smallestElement(root).data)
+
+#find the k-largest element
+counter = 0
