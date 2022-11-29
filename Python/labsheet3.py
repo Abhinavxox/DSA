@@ -77,19 +77,61 @@ class Node:
         self.data = data
     
     def insert(self,data):
-        if self.data == None:
+        if self.data is None:
             self.data = data
         else:
             if data<self.data:
-                if self.left == None:
+                if self.left is None:
                     self.left = Node(data)
                 else:
                     self.left.insert(data)
             elif data>self.data:
-                if self.right == None:
+                if self.right is None:
                     self.right = Node(data)
                 else:
                     self.right.insert(data)
+
+    def delete(self,data):
+        if self is None:
+            return self
+
+
+        if data < self.data:
+            self.left = self.left.delete(data)
+            return self
+        elif data > self.data:
+            self.right = self.right.delete(data)
+            return self
+
+        if self.left is None and self.right is None:
+            return None
+        
+        #case-1 only leaf node no children  
+        if self.left is None:
+            temp = self.right 
+            self = None
+            return temp
+        elif self.right is None:
+            temp = self.left
+            self = None
+            return temp
+        
+        #case2
+        succParent = self
+        succ = self.right
+        while succ.left is not None:
+            succParent = succ
+            succ = succ.left
+        
+        if succParent != self:
+            succParent.left = succParent.right
+        else:
+            succParent.right = succParent.right
+        
+        self.data = succ.data
+        return self
+
+
 
 #inserting 10 values in 
 
@@ -112,6 +154,10 @@ def inorder(root):
         print(root.data)
         inorder(root.right)
 
+print("the bst is : ")
 inorder(root)
 
 #function to delete a node
+root.delete(84)
+print("\nthe bst after deleting 84 is : ")
+inorder(root)
