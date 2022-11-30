@@ -172,4 +172,3 @@ def smallestElement(root):
 print("the smallest in the tree is ", smallestElement(root).data)
 
 #find the k-largest element
-counter = 0
