@@ -91,7 +91,8 @@ print("The height of the tree created is : ",height(root)-1)
 def inorder(root):
     if root:
         inorder(root.left)
-        print(root.data)
+        print(root.data)#right rotation
+
         inorder(root.right)
 
 print("Inorder traversal of binary tree is:")

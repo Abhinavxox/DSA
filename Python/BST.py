@@ -172,3 +172,27 @@ def smallestElement(root):
 print("the smallest in the tree is ", smallestElement(root).data)
 
 #find the k-largest element
+
+def KthLargest(root, k):
+    if root is None:
+        return root
+    
+    right  = KthLargest(root.right, k)
+
+    if right is not None:
+        return right
+
+    k[0] -= 1
+    if k[0] == 0:
+        return root
+    else:
+        return KthLargest(root.left, k)
+
+k = int(input("Enter the value of K: "))
+K = [k]
+result = KthLargest(root,K)
+
+if result is None:
+    print("There are less than k nodes in the Tree")
+else:
+    print("The Kth largest element is ", result.data)
