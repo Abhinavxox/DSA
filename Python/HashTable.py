@@ -1,3 +1,10 @@
+class Node:
+
+        def __init__(self, key, value):
+            self.key = key
+            self.value = value
+            self.next = None
+
 class HashTable:
 
     def __init__(self,size):
@@ -5,12 +12,6 @@ class HashTable:
         self.size = 0
         self.buckets = [None] * self.capacity
 
-    class Node:
-
-        def __init__(self, key, value):
-            self.key = key
-            self.value = value
-            self.next = None
 
     def size(self):
         return self.size
@@ -37,33 +38,33 @@ class HashTable:
             node = node.next
         prev.next = Node(key, value)
 
-        def find(self, key):
-            index = self.hash(key)
-            node = self.buckets[index]
-            while node is not None and node.key != key:
-                node = node.next
-            if node is None:
-                return None
-            else:
-                return node.value
+    def find(self, key):
+        index = self.hash(key)
+        node = self.buckets[index]
+        while node is not None and node.key != key:
+            node = node.next
+        if node is None:
+            return None
+        else:
+            return node.value
 
-        def remove(self, key):
-            index = self.hash(key)
-            node = self.buckets[index]
-            prev = None
-            while node is not None and node.key != key:
-                prev = node
-                node = node.next
-            if node is None:
-                return None
+    def remove(self, key):
+        index = self.hash(key)
+        node = self.buckets[index]
+        prev = None
+        while node is not None and node.key != key:
+            prev = node
+            node = node.next
+        if node is None:
+            return None
+        else:
+            self.size -= 1
+            result = node.value
+            if prev is None:
+                self.buckets[index] = node.next
             else:
-                self.size -= 1
-                result = node.value
-                if prev is None:
-                    self.buckets[index] = node.next
-                else:
-                    prev.next = prev.next.next
-                return result
+                prev.next = prev.next.next
+            return result
 
 
 
@@ -77,6 +78,8 @@ def repeated_char(string):
         else:
             hash_table.insert(char, True)
     return False
+
+#print(repeated_char("hello"))
 
 #2 Given a string of any length, find the most-used character in the string using hash table
 
@@ -95,6 +98,8 @@ def most_used_char(string):
             max_count = hash_table.find(char)
             max_char = char
     return max_char
+
+#print(most_used_char("hello"))
 
 #3 Write a function to determine whether two strings are anagrams using hash table
 
@@ -120,3 +125,4 @@ def anagram(string1, string2):
             return False
     return True
 
+print(anagram("hello", "olleh"))
