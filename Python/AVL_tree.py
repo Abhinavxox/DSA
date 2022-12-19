@@ -4,21 +4,6 @@ class Node:
         self.left = None
         self.right = None
 
-    def insert(self, data):
-        if self.data:
-            if data < self.data:
-                if self.left == None:
-                    self.left = Node(data)
-                else:
-                    self.left.insert(data)
-            elif data > self.data:
-                if self.right == None:
-                    self.right = Node(data)
-                else:
-                    self.right.insert(data)
-        else:
-            self.data = data
-
 #left rotation
 def left_rotation(node):
     new_node = node.right
@@ -43,32 +28,7 @@ def right_left_rotation(node):
     node.right = right_rotation(node.right)
     return left_rotation(node)
 
-#insert node
-def insert(root, data):
-    if root is None:
-        return Node(data)
-    if data < root.data:
-        root.left = insert(root.left, data)
-    else:
-        root.right = insert(root.right, data)
-    balance = balancedFactor(root)
-    if balance > 1 and data < root.left.data:
-        return right_rotation(root)
-    if balance < -1 and data > root.right.data:
-        return left_rotation(root)
-    if balance > 1 and data > root.left.data:
-        return left_right_rotation(root)
-    if balance < -1 and data < root.right.data:
-        return right_left_rotation(root)
-    return root
-
-print("Enter the elements to be inserted in the AVL tree: ")
-elements = input().split()
-root = Node(elements[0])
-for i in range(1, len(elements)):
-    root.insert(elements[i])
-
-def balancedFactor(root):
+def balance_factor(root):
     if root is None:
         return 0
     return height(root.left) - height(root.right)
@@ -85,7 +45,35 @@ def height(root):
         else:
             return rheight+1
         
-print("The height of the tree created is : ",height(root)-1)
+
+#insert node
+def insert(root,data):
+    if root == None:
+        return Node(data)
+    
+    if data<root.data:
+        root.left = insert(root.left, data)
+    else:
+        root.right = insert(root.right, data)
+
+    #balancing the tree
+    bf = balance_factor(root)
+    if bf>1 and data<root.left.data:
+        return right_rotation(root)
+    elif bf<-1 and data>root.right.data:
+        return left_rotation(root)
+    elif bf>1 and data>root.left.data:
+        return left_right_rotation(root)
+    elif bf<-1 and data<root.right.data:
+        return right_left_rotation(root)
+    
+    return root
+
+print("Enter the elements to be inserted in the AVL tree: ")
+elements = input().split()
+root = Node(elements[0])
+for i in range(1, len(elements)):
+    root = insert(root,elements[i])
 
 
 def inorder(root):
@@ -118,13 +106,15 @@ postorder(root)
 
 
 
-def delete(root, data):
+def delete(root,data):
     if root is None:
         return root
-    elif data < root.data:
+    
+    if data < root.data:
         root.left = delete(root.left, data)
     elif data > root.data:
         root.right = delete(root.right, data)
+
     else:
         if root.left is None:
             temp = root.right
@@ -134,33 +124,32 @@ def delete(root, data):
             temp = root.left
             root = None
             return temp
-        temp = minValueNode(root.right)
-        root.data = temp.data
-        root.right = delete(root.right, temp.data)
-    if root is None:
-        return root
-    root.height = 1 + max(height(root.left), height(root.right))
-    balance = balancedFactor(root)
-    if balance > 1 and balancedFactor(root.left) >= 0:
+        else:
+            #replace it with inorder successor
+            temp = root.right
+            while(temp.left is not None):
+                temp = temp.left
+            
+            root.data = temp.data
+            root.right = delete(root.right, temp.data)
+
+    if root == None:
+        return Node(data)
+    #balancing the tree
+    bf = balance_factor(root)
+    if bf>1 and data<root.left.data:
         return right_rotation(root)
-    if balance < -1 and balancedFactor(root.right) <= 0:
+    elif bf<-1 and data>root.right.data:
         return left_rotation(root)
-    if balance > 1 and balancedFactor(root.left) < 0:
-        root.left = left_rotation(root.left)
-        return right_rotation(root)
-    if balance < -1 and balancedFactor(root.right) > 0:
-        root.right = right_rotation(root.right)
-        return left_rotation(root)
+    elif bf>1 and data>root.left.data:
+        return left_right_rotation(root)
+    elif bf<-1 and data<root.right.data:
+        return right_left_rotation(root)
+    
     return root
 
-def minValueNode(node):
-    current = node
-    while(current.left is not None):
-        current = current.left
-    return current
-
-deletionValue = input("Enter the node you want to delete :")
-delete(root, deletionValue)
-print("Inorder traversal of binary tree after deletion of "+deletionValue+" is : ")
-inorder(root)
-print("The height of the tree after deletion is : ",height(root)-1)
+# deletionValue = input("Enter the node you want to delete :")
+# root = delete(root, deletionValue)
+# print("Inorder traversal of binary tree after deletion of "+deletionValue+" is : ")
+# inorder(root)
+# print("The height of the tree after deletion is : ",height(root))
