@@ -173,26 +173,26 @@ print("the smallest in the tree is ", smallestElement(root).data)
 
 #find the k-largest element
 
-def KthLargest(root, k):
+def KthLargest(root,k):
     if root is None:
-        return root
-    
-    right  = KthLargest(root.right, k)
-
-    if right is not None:
-        return right
-
-    k[0] -= 1
-    if k[0] == 0:
-        return root
-    else:
-        return KthLargest(root.left, k)
+        return None
+    stack = []
+    while(True):
+        while(root):
+            stack.append(root)
+            root = root.right
+        root = stack.pop()
+        k = k -1
+        if k==0:
+            return root.data
+        root =root.left
 
 k = int(input("Enter the value of K: "))
-K = [k]
-result = KthLargest(root,K)
+result = KthLargest(root,k)
 
 if result is None:
     print("There are less than k nodes in the Tree")
 else:
     print("The Kth largest element is ", result.data)
+
+#merge two trees
