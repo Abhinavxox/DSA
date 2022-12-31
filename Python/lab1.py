@@ -90,3 +90,12 @@ def postorder(root):
 
 # print("Postorder traversal of binary tree is:")
 # postorder(root)
+
+def isCompleteTree(root):
+    if root == None:
+        return True
+    if root.left == None and root.right == None:
+        return True
+    if root.left != None and root.right != None:
+        return (isCompleteTree(root.left) and isCompleteTree(root.right))
+    return False

@@ -211,4 +211,4 @@ print("The second tree is: ")
 inorder(tree2)
 
 print("The merged tree is ")
-inorder(mergeTrees(tree1, tree2))
+inorder(merge(tree1, tree2))
