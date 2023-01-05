@@ -1,5 +1,3 @@
-#implement adjacency matrix in py
-
 class Graph:
     def __init__(self, vertices):
         self.V = vertices
@@ -33,5 +31,4 @@ graph.add_edge(2, 4)
 graph.add_edge(3, 4)
 graph.add_edge(4, 6)
 print("Adjacency Matrix:")
-graph.print_graph()
-
+graph.print_graph() 
