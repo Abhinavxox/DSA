@@ -56,21 +56,25 @@ class Graph:
 
 
 graph = Graph()
-graph.add_vertex(Vertex('0'))
-graph.add_vertex(Vertex('1'))
-graph.add_vertex(Vertex('2'))
-graph.add_vertex(Vertex('3'))
-graph.add_vertex(Vertex('4'))
-graph.add_vertex(Vertex('5'))
-graph.add_vertex(Vertex('6'))
+graph.add_vertex(Vertex('A'))
+graph.add_vertex(Vertex('B'))
+graph.add_vertex(Vertex('C'))
+graph.add_vertex(Vertex('D'))
+graph.add_vertex(Vertex('E'))
+graph.add_vertex(Vertex('F'))
+graph.add_vertex(Vertex('G'))
+graph.add_vertex(Vertex('H'))
+graph.add_vertex(Vertex('I'))
+graph.add_vertex(Vertex('J'))
 
-edges = ['01', '03', '12', '13', '15', '16', '23', '25', '24','34','46']
+edges = ['AB', 'BC', 'ED', 'FD', 'DG', 'DH', 'HI', 'IJ', 'JG','FG']
 for edge in edges:
     graph.add_edge(edge[:1], edge[1:])
 
-print("BFS Traversal: ")
-graph.bfs('0')
+# print("BFS Traversal: ")
+# graph.bfs('A')
+# print()
 
-print("\nDFS Traversal: ")
-graph.dfs('0')
+print("DFS Traversal: ")
+graph.dfs('G')
 print()
