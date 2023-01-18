@@ -72,6 +72,6 @@ graph.add_directed_edge('e','f')
 graph.add_directed_edge('f','a')
 graph.add_directed_edge('a','d')
 graph.add_directed_edge('e','b')
-graph.add_directed_edge('f','b')
+graph.add_directed_edge('b','f')
 
 graph.print_directed_graph()
