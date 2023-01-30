@@ -26,7 +26,7 @@
 # graph.add_edge(1, 5)
 # graph.add_edge(1, 6)
 # graph.add_edge(2, 3)
-# graph.add_edge(2, 5)
+# graph.add_edge(2, 5)gui
 # graph.add_edge(2, 4)
 # graph.add_edge(3, 4)
 # graph.add_edge(4, 6)
