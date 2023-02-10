@@ -1,5 +1,6 @@
 class Solution:
     def minimizeSum(self, N, arr):
+        
         # arr.sort()
         # minSum = 0
         # while(N>1):
