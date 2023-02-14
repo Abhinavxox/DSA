@@ -1,4 +1,4 @@
-#topological sorting
+#topological sorting using Kahn's Algorithm
 def ancestors(n, edgeList):
     adj_list = {i: [] for i in range(n)}
     indegree = [0] * n
