@@ -125,4 +125,4 @@ def anagram(string1, string2):
             return False
     return True
 
-print(anagram("hello", "olleh"))
+print(anagram("hello", "ollhe"))
